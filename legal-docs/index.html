@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Legal Doc Generator | Professional Contract Creation</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #4a6fa5;
+      --secondary-color: #166088;
+      --accent-color: #4fc3f7;
+      --success-color: #28a745;
+      --warning-color: #ffc107;
+      --danger-color: #dc3545;
+      --light-color: #f8f9fa;
+      --dark-color: #343a40;
+      --text-color: #495057;
+      --border-color: #dee2e6;
+      --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+      --bg-color: #f5f7fa;
+      --card-bg: #ffffff;
+    }
+
+    .dark-mode {
+      --primary-color: #6c8fc7;
+      --secondary-color: #4a6fa5;
+      --accent-color: #29b6f6;
+      --success-color: #4caf50;
+      --warning-color: #ff9800;
+      --bg-color: #121212;
+      --card-bg: #1e1e1e;
+      --text-color: #e0e0e0;
+      --border-color: #444;
+      --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      --light-color: #2d2d2d;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      transition: var(--transition);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: var(--secondary-color);
+      margin-bottom: 0.5rem;
+    }
+
+    header h1 i {
+      margin-right: 0.8rem;
+      color: var(--primary-color);
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: #6c757d;
+    }
+
+    /* Dark Mode Toggle */
+    .theme-toggle {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Support Section */
+    .support-section {
+      background: rgba(74, 111, 165, 0.1);
+      padding: 2rem;
+      border-radius: 10px;
+      margin-top: 3rem;
+      text-align: center;
+      border: 1px solid var(--border-color);
+    }
+
+    .support-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .support-btn {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .support-btn:hover {
+      background: var(--secondary-color);
+    }
+
+    /* Rest of your existing styles */
+    .app-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .form-section, .preview-section {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .form-section {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+    }
+
+    .preview-section {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-row .form-group {
+      flex: 1;
+      margin-bottom: 0;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--dark-color);
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: var(--transition);
+      background-color: var(--card-bg);
+      color: var(--text-color);
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(74, 111, 165, 0.2);
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    button {
+      cursor: pointer;
+      transition: var(--transition);
+      border: none;
+      border-radius: 6px;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .generate-btn {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 1rem;
+      font-size: 1.1rem;
+      width: 100%;
+    }
+
+    .generate-btn:hover {
+      background-color: var(--secondary-color);
+    }
+
+    #doc-area {
+      display: none;
+    }
+
+    .document-header {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    #document-title {
+      font-family: 'Playfair Display', serif;
+      color: var(--secondary-color);
+      margin-bottom: 0.5rem;
+    }
+
+    .document-meta {
+      display: flex;
+      justify-content: space-between;
+      color: #6c757d;
+      font-size: 0.9rem;
+    }
+
+    .document-box {
+      background: var(--card-bg);
+      padding: 2rem;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      line-height: 1.8;
+      white-space: pre-wrap;
+      font-size: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .signature-section {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 3rem;
+      gap: 2rem;
+    }
+
+    .signature-block {
+      flex: 1;
+    }
+
+    .signature-line {
+      border-top: 1px solid var(--border-color);
+      padding-top: 0.5rem;
+      margin-bottom: 0.5rem;
+      font-style: italic;
+    }
+
+    .signature-name {
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .download-btn, .copy-btn, .ai-btn {
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+    }
+
+    .download-btn {
+      background-color: var(--success-color);
+      color: white;
+    }
+
+    .download-btn:hover {
+      background-color: #218838;
+    }
+
+    .copy-btn {
+      background-color: var(--warning-color);
+      color: var(--dark-color);
+    }
+
+    .copy-btn:hover {
+      background-color: #e0a800;
+    }
+
+    .ai-btn {
+      background-color: var(--accent-color);
+      color: white;
+    }
+
+    .ai-btn:hover {
+      background-color: #29b6f6;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-color);
+      color: #6c757d;
+      font-size: 0.9rem;
+    }
+
+    #loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .loading-content {
+      text-align: center;
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+    }
+
+    .loading-content i {
+      font-size: 3rem;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+    }
+
+    .loading-content p {
+      font-size: 1.2rem;
+      color: var(--text-color);
+    }
+
+    @media (max-width: 768px) {
+      .app-container {
+        flex-direction: column;
+      }
+      
+      .form-row {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      
+      .signature-section {
+        flex-direction: column;
+      }
+      
+      header h1 {
+        font-size: 2rem;
+      }
+
+      .theme-toggle {
+        position: relative;
+        top: auto;
+        right: auto;
+        margin: 1rem auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1><i class="fas fa-file-contract"></i> AI Legal Document Generator</h1>
+      <p class="subtitle">Create professional legal documents in minutes</p>
+      <button class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i> Dark Mode
+      </button>
+    </header>
+
+    <div class="app-container">
+      <div class="form-section">
+        <form id="doc-form">
+          <div class="form-group">
+            <label for="document-type">Document Type:</label>
+            <select id="document-type" required>
+              <option value="">-- Select Document --</option>
+              <option value="service-agreement">Service Agreement</option>
+              <option value="nda">Non-Disclosure Agreement</option>
+              <option value="employment-contract">Employment Contract</option>
+              <option value="lease-agreement">Lease Agreement</option>
+              <option value="custom">Custom Document</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="your-name">Your Name/Company:</label>
+              <input type="text" id="your-name" required placeholder="John Doe or Acme Inc.">
+            </div>
+            <div class="form-group">
+              <label for="client-name">Client Name/Company:</label>
+              <input type="text" id="client-name" required placeholder="Jane Smith or XYZ Corp">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="service">Service/Agreement Details:</label>
+            <textarea id="service" rows="3" required placeholder="Describe the service or agreement terms"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="additional-terms">Additional Terms (AI will refine these):</label>
+            <textarea id="additional-terms" rows="3" placeholder="Any special conditions or clauses"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="tone">Document Tone:</label>
+            <select id="tone">
+              <option value="professional">Professional</option>
+              <option value="friendly">Friendly</option>
+              <option value="strict">Strict/Legal</option>
+            </select>
+          </div>
+
+          <button type="submit" class="generate-btn">
+            <i class="fas fa-magic"></i> Generate Document
+          </button>
+        </form>
+      </div>
+
+      <div class="preview-section">
+        <div id="doc-area">
+          <div class="document-header">
+            <h2 id="document-title">Document Preview</h2>
+            <div class="document-meta">
+              <span id="document-date"></span>
+              <span id="document-id"></span>
+            </div>
+          </div>
+          
+          <div id="result" class="document-box"></div>
+          
+          <div class="signature-section">
+            <div class="signature-block">
+              <p class="signature-line">Signed by: _________________________</p>
+              <p class="signature-name" id="your-signature"></p>
+              <p class="signature-date">Date: _______________</p>
+            </div>
+            <div class="signature-block">
+              <p class="signature-line">Signed by: _________________________</p>
+              <p class="signature-name" id="client-signature"></p>
+              <p class="signature-date">Date: _______________</p>
+            </div>
+          </div>
+          
+          <div class="action-buttons">
+            <button id="download-btn" class="download-btn">
+              <i class="fas fa-file-pdf"></i> Download as PDF
+            </button>
+            <button id="copy-btn" class="copy-btn">
+              <i class="far fa-copy"></i> Copy Text
+            </button>
+            <button id="ai-refine-btn" class="ai-btn">
+              <i class="fas fa-robot"></i> AI Refinement
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Support and Donations Section -->
+    <div class="support-section">
+      <h3>Need Help or Want to Support Our Work?</h3>
+      <p>Contact us for custom documents or premium support services</p>
+      <div class="support-buttons">
+        <button class="support-btn" id="contact-btn">
+          <i class="fas fa-envelope"></i> Contact Support
+        </button>
+        <button class="support-btn" id="donate-btn">
+          <i class="fas fa-heart"></i> Make Donation
+        </button>
+      </div>
+    </div>
+
+    <footer>
+      <p>AI Legal Document Generator &copy; <span id="current-year"></span> | Secure and Confidential</p>
+    </footer>
+  </div>
+
+  <!-- Loading overlay -->
+  <div id="loading-overlay">
+    <div class="loading-content">
+      <i class="fas fa-spinner fa-spin"></i>
+      <p>Generating your document...</p>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script>
+    // Dark Mode Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      const isDarkMode = document.body.classList.contains('dark-mode');
+      themeToggle.innerHTML = isDarkMode 
+        ? '<i class="fas fa-sun"></i> Light Mode' 
+        : '<i class="fas fa-moon"></i> Dark Mode';
+      
+      // Save preference to localStorage
+      localStorage.setItem('darkMode', isDarkMode);
+    });
+
+    // Check for saved preference
+    if (localStorage.getItem('darkMode') === 'true') {
+      document.body.classList.add('dark-mode');
+      themeToggle.innerHTML = '<i class="fas fa-sun"></i> Light Mode';
+    }
+
+    // Set current year in footer
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // Support and Donation buttons
+    document.getElementById('contact-btn').addEventListener('click', () => {
+      alert('Please email us at: support@legaldocgenerator.com');
+    });
+
+    document.getElementById('donate-btn').addEventListener('click', () => {
+      alert('Donation link would open payment processor here');
+    });
+
+    // Your existing document generation code would go here
+    document.getElementById('doc-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('loading-overlay').style.display = 'flex';
+      
+      // Get form values
+      const name = document.getElementById('your-name').value;
+      const client = document.getElementById('client-name').value;
+      const service = document.getElementById('service').value;
+      
+      // Generate document text
+      const docText = `AGREEMENT\n\nThis agreement is between ${name} and ${client}.\n${name} agrees to provide ${service} to ${client}.\n\nSigned,\n${name} & ${client}`;
+      
+      // Display after short delay
+      setTimeout(() => {
+        document.getElementById('result').textContent = docText;
+        document.getElementById('doc-area').style.display = 'block';
+        document.getElementById('loading-overlay').style.display = 'none';
+      }, 1000);
+    });
+
+    // PDF Download
+    document.getElementById('download-btn').addEventListener('click', function() {
+      const element = document.getElementById('doc-area');
+      const opt = {
+        margin: 10,
+        filename: 'legal_document.pdf',
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+      
+      html2pdf().from(element).set(opt).save();
+    });
+  </script>
+</body>
+</html>
