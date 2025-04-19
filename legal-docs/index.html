@@ -384,6 +384,13 @@
         margin: 1rem auto;
       }
     }
+
+    .custom-footer {
+      background: #000;
+      color: #ff0000;
+      padding: 20px;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -494,16 +501,17 @@
       <div class="support-buttons">
         <button class="support-btn" id="contact-btn">
           <i class="fas fa-envelope"></i> Contact Support
-        </button>
-        <button class="support-btn" id="donate-btn">
-          <i class="fas fa-heart"></i> Make Donation
+    <footer class="custom-footer">  
+      © <span id="year"></span> BLVCK PARAGRAPH LLC. All rights reserved.  
+    </footer>  
         </button>
       </div>
     </div>
 
-    <footer>
-      <p>AI Legal Document Generator &copy; <span id="current-year"></span> | Secure and Confidential</p>
-    </footer>
+    <footer style="background: #000; color: #ff0000; padding: 20px; text-align: center;">  
+      © <span id="year"></span> BLVCK PARAGRAPH LLC. All rights reserved.  
+    </footer>  
+    <script>document.getElementById('year').textContent = new Date().getFullYear();</script>  
   </div>
 
   <!-- Loading overlay -->
@@ -540,7 +548,7 @@
 
     // Support and Donation buttons
     document.getElementById('contact-btn').addEventListener('click', () => {
-      alert('Please email us at: support@legaldocgenerator.com');
+      alert('Please email us at: benaliaymen@fstsbz.u-kairouan.tn');
     });
 
     document.getElementById('donate-btn').addEventListener('click', () => {
